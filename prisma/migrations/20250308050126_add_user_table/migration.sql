@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('ADMIN', 'CANDIDATE', 'RECRUITER');
+
+-- AlterTable
+ALTER TABLE "User" ALTER COLUMN "updated_at" DROP NOT NULL;
