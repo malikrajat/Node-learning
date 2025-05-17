@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import authController from '../controllers/auth.controller';
 import asyncWrapper from '../../../globals/cores/asyncwrapper.core';
-import { verifyUser } from 'src/globals/middleware/verifyUser.middleware';
+import { verifyUser } from '../../../globals/middleware/verifyUser.middleware';
 
 const authRoutes = Router();
 authRoutes.post('/signup', asyncWrapper(authController.singUp));
