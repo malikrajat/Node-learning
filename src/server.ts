@@ -2,7 +2,7 @@ import express, { Application, NextFunction, Request, Response } from 'express';
 import { appRoutes } from './globals/routes/appRoutes';
 import { StatusCodes } from 'http-status-codes';
 import { error } from 'console';
-import { CustomError, NotFoundError } from './globals/cores/error.core';
+import { CustomError, NotFoundException } from './globals/cores/error.core';
 import CookieParser from 'cookie-parser';
 
 export default class Server {
@@ -35,7 +35,7 @@ export default class Server {
       //   message: `Can't find ${req.originalUrl} on this server! with method ${req.method}`,
       // });
       next(
-        new NotFoundError(
+        new NotFoundException(
           `Can't find ${req.originalUrl} on this server! with method ${req.method}`
         )
       );

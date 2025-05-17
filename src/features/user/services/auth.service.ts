@@ -1,6 +1,6 @@
 import prisma from '../../../globals/prisma';
 import bcrypt from 'bcrypt';
-import { BadRequestError } from '../../../globals/cores/error.core';
+import { BadRequestException } from '../../../globals/cores/error.core';
 import { generateToken } from '../../../globals/helpers/jwt.helper';
 
 class AuthService {
@@ -24,12 +24,12 @@ class AuthService {
     const { email, password } = req;
     const user = await this.findUserByEmail(email);
     if (!user) {
-      throw new BadRequestError('User not found');
+      throw new BadRequestException('User not found');
     }
 
     const passwordMatch = await bcrypt.compare(password, user.password);
     if (!passwordMatch) {
-      throw new BadRequestError('Password not match');
+      throw new BadRequestException('Password not match');
     }
     const accessToken = await generateToken(user);
     return accessToken;

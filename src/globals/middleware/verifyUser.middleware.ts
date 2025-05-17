@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import jwt from 'jsonwebtoken';
-import { BadRequestError } from '../cores/error.core';
+import { BadRequestException } from '../cores/error.core';
 
 export async function verifyUser(
   req: Request,
@@ -10,7 +10,7 @@ export async function verifyUser(
 ) {
   const accessToken = req.cookies.accessToken;
   if (!accessToken) {
-    next(new BadRequestError('Access token not found'));
+    next(new BadRequestException('Access token not found'));
     return;
   }
   const user = (await jwt.verify(

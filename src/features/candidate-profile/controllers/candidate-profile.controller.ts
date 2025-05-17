@@ -32,20 +32,20 @@ class CandidateProfileController {
     });
   }
 
-  async getById(req: Request, res: Response, next: NextFunction) {
-    const candidateProfile = await candidateProfileService.getById(
-      +req.params.id
-    );
-    if (!candidateProfile) {
-      return res
-        .status(StatusCodes.NOT_FOUND)
-        .json({ message: 'candidate profile not found' });
-    }
-    return res.status(StatusCodes.OK).json({
-      message: 'candidate profile',
-      profile: candidateProfile,
-    });
-  }
+  // async getById(req: Request, res: Response, next: NextFunction) {
+  //   const candidateProfile = await candidateProfileService.getById(
+  //     +req.params.id
+  //   );
+  //   if (!candidateProfile) {
+  //     return res
+  //       .status(StatusCodes.NOT_FOUND)
+  //       .json({ message: 'candidate profile not found' });
+  //   }
+  //   return res.status(StatusCodes.OK).json({
+  //     message: 'candidate profile',
+  //     profile: candidateProfile,
+  //   });
+  // }
 
   async update(req: Request, res: Response, next: NextFunction) {
     const candidateProfile = await candidateProfileService.update(
@@ -60,6 +60,12 @@ class CandidateProfileController {
     return res.status(StatusCodes.OK).json({
       message: 'candidate profile updated',
       profile: candidateProfile,
+    });
+  }
+  async remove(req: Request, res: Response, next: NextFunction) {
+    await candidateProfileService.remove(+req.params.id);
+    res.status(StatusCodes.OK).json({
+      message: 'candidate profile Deleted succesfully',
     });
   }
 }
